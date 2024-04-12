@@ -3,9 +3,13 @@ import {Button, Form, Input, Space} from "antd";
 import {FileAddOutlined} from "@ant-design/icons";
 
 export const AddTodoItem: React.FC<{ onAddTodoItem: (label: string) => void }> = ({ onAddTodoItem }) => {
+    const [form] = Form.useForm();
+
     return (
         <>
-            <Form onFinish={(values) => onAddTodoItem(values.text)}>
+            <Form form={form} onFinish={(values) => {
+                onAddTodoItem(values.text); form.resetFields();
+            }}>
                 <Space>
                     <Form.Item
                         label="Todo"

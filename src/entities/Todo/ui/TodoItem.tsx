@@ -13,7 +13,9 @@ export const TodoItem: React.FC<ITodoItemProps> = ({ id, label, done, onDoneStat
     return (
         <Flex align="center" justify="space-between">
             <Checkbox checked={done} onChange={() => onDoneStatusChanged(id, !done)}>
-                { done ? <Typography.Text key="1" delete>{label}</Typography.Text> : <Typography.Text key="2">{label}</Typography.Text>}
+                { done
+                    ? <Typography.Text key="1" delete style={{width: '100%'}}>{label}</Typography.Text>
+                    : <Typography.Text key="2" style={{width: '100%'}}>{label}</Typography.Text>}
             </Checkbox>
             <Button danger icon={<DeleteOutlined />} onClick={() => onDelete(id)} />
         </Flex>
