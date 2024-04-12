@@ -14,5 +14,9 @@ export default defineConfig({
       '@pages': fileURLToPath(new URL('./src/pages', import.meta.url)),
       '@widgets': fileURLToPath(new URL('./src/widgets', import.meta.url)),
     }
+  },
+  build: {
+    outDir: './extension',
+    emptyOutDir: false,
   }
 })

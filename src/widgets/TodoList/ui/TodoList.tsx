@@ -42,7 +42,6 @@ export const TodoList: React.FC = () => {
                             creationDate={item.creationDate}
                             onDoneStatusChanged={onDoneStatusChanged}
                             onDelete={onDelete}
-                            style={{ width: '100%' }}
                         />
                     )
                 }
