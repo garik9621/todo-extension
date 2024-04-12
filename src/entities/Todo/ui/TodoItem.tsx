@@ -1,6 +1,6 @@
 import React from "react";
 import {ITodoItem} from "@entities/Todo/model/ITodoItem";
-import {Button, Checkbox, Flex, Text} from "antd";
+import {Button, Checkbox, Flex, Typography} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 
 interface ITodoItemProps extends ITodoItem {
@@ -13,7 +13,7 @@ export const TodoItem: React.FC<ITodoItemProps> = ({ id, label, done, onDoneStat
     return (
         <Flex align="center" justify="space-between">
             <Checkbox checked={done} onChange={() => onDoneStatusChanged(id, !done)}>
-                <Text delete={done}>{label}</Text>
+                { done ? <Typography.Text key="1" delete>{label}</Typography.Text> : <Typography.Text key="2">{label}</Typography.Text>}
             </Checkbox>
             <Button danger icon={<DeleteOutlined />} onClick={() => onDelete(id)} />
         </Flex>

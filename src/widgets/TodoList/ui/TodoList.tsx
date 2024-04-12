@@ -1,9 +1,20 @@
 import React, {useState} from "react";
 import {TodoItem} from "@entities/Todo/ui/TodoItem.tsx";
 import {ITodoItem} from "@entities/Todo";
+import {AddTodoItem} from "@features/AddTodoItem";
 
 export const TodoList: React.FC = () => {
     const [todoList, setTodoList] = useState<ITodoItem[]>([]);
+
+    const onAddTodoItem = (text: string) => {
+        const newTodoItem: ITodoItem = {
+            id: `${Math.floor(Math.random() * 999999)}`,
+            label: text,
+            done: false,
+            creationDate: `${Date.now()}`
+        }
+        setTodoList([...todoList, newTodoItem]);
+    };
 
     const onDoneStatusChanged = (id: string, done: boolean) => {
         setTodoList(todoList.map(item => ({
@@ -18,6 +29,7 @@ export const TodoList: React.FC = () => {
 
     return (
         <>
+            <AddTodoItem onAddTodoItem={onAddTodoItem} />
         {
             todoList.map((item, index) =>
                 <TodoItem
