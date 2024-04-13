@@ -7,10 +7,14 @@ export const AddTodoItem: React.FC<{ onAddTodoItem: (label: string) => void }> =
 
     return (
         <>
-            <Form form={form} onFinish={(values) => {
-                onAddTodoItem(values.text); form.resetFields();
-            }}>
-                <Space>
+            <Form
+                form={form}
+                onFinish={(values) => {
+                    onAddTodoItem(values.text); form.resetFields();
+                }}
+                style={{width: '100%'}}
+            >
+                <Space style={{width: '100%'}} styles={{item: {width: '100%'}}}>
                     <Form.Item
                         label="Todo"
                         name="text"

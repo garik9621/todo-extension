@@ -3,6 +3,12 @@ import {TodoItem} from "@entities/Todo/ui/TodoItem.tsx";
 import {ITodoItem} from "@entities/Todo";
 import {AddTodoItem} from "@features/AddTodoItem";
 import {Space} from "antd";
+import styled from "styled-components";
+
+const TodoListWrapperStyled = styled.div`
+    max-height: 300px;
+    overflow-y: auto;
+`
 
 export const TodoList: React.FC = () => {
     const [todoList, setTodoList] = useState<ITodoItem[]>([]);
@@ -31,21 +37,23 @@ export const TodoList: React.FC = () => {
     return (
         <>
             <AddTodoItem onAddTodoItem={onAddTodoItem} />
-            <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                {
-                    todoList.map((item, index) =>
-                        <TodoItem
-                            key={index}
-                            id={item.id}
-                            label={item.label}
-                            done={item.done}
-                            creationDate={item.creationDate}
-                            onDoneStatusChanged={onDoneStatusChanged}
-                            onDelete={onDelete}
-                        />
-                    )
-                }
-            </Space>
+            <TodoListWrapperStyled>
+                <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+                    {
+                        todoList.map((item, index) =>
+                            <TodoItem
+                                key={index}
+                                id={item.id}
+                                label={item.label}
+                                done={item.done}
+                                creationDate={item.creationDate}
+                                onDoneStatusChanged={onDoneStatusChanged}
+                                onDelete={onDelete}
+                            />
+                        )
+                    }
+                </Space>
+            </TodoListWrapperStyled>
         </>
     )
 }

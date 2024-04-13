@@ -16,7 +16,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: './extension',
-    emptyOutDir: false,
+    outDir: './extension/dist',
+    assetsDir: './assets'
   }
 })
