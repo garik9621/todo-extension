@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import {TodoItem} from "@entities/Todo/ui/TodoItem.tsx";
-import {ITodoItem} from "@entities/Todo";
+import {deleteItem, updateItem} from "@entities/Todo";
 import {AddTodoItem} from "@features/AddTodoItem";
 import {Space} from "antd";
 import styled from "styled-components";
+import {useDispatch, useSelector} from "react-redux";
 
 const TodoListWrapperStyled = styled.div`
     max-height: 300px;
@@ -11,32 +12,25 @@ const TodoListWrapperStyled = styled.div`
 `
 
 export const TodoList: React.FC = () => {
-    const [todoList, setTodoList] = useState<ITodoItem[]>([]);
-
-    const onAddTodoItem = (text: string) => {
-        const newTodoItem: ITodoItem = {
-            id: `${Math.floor(Math.random() * 999999)}`,
-            label: text,
-            done: false,
-            creationDate: `${Date.now()}`
-        }
-        setTodoList([...todoList, newTodoItem]);
-    };
+    const todoList = useSelector(state => state.todo.items);
+    const dispatch = useDispatch();
 
     const onDoneStatusChanged = (id: string, done: boolean) => {
-        setTodoList(todoList.map(item => ({
-            ...item,
-            ...(item.id === id ? {done} : {})
-        })))
+        const targetItem = todoList.find(item => item.id === id);
+
+        dispatch(updateItem({
+            ...targetItem,
+            done,
+        }))
     }
 
     const onDelete = (id: string) => {
-        setTodoList(todoList.filter(item => item.id !== id))
+        dispatch(deleteItem(id));
     }
 
     return (
         <>
-            <AddTodoItem onAddTodoItem={onAddTodoItem} />
+            <AddTodoItem />
             <TodoListWrapperStyled>
                 <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
                     {

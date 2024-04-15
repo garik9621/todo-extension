@@ -1,16 +1,18 @@
-import React from "react";
 import {Button, Form, Input, Space} from "antd";
 import {FileAddOutlined} from "@ant-design/icons";
+import {useDispatch} from "react-redux";
+import {addItem} from "@entities/Todo";
 
-export const AddTodoItem: React.FC<{ onAddTodoItem: (label: string) => void }> = ({ onAddTodoItem }) => {
+export const AddTodoItem: React.FC = () => {
     const [form] = Form.useForm();
+    const dispatch = useDispatch();
 
     return (
         <>
             <Form
                 form={form}
                 onFinish={(values) => {
-                    onAddTodoItem(values.text); form.resetFields();
+                    dispatch(addItem(values.text)); form.resetFields();
                 }}
                 style={{width: '100%'}}
             >
