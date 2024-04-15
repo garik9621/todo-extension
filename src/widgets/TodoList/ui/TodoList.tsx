@@ -4,7 +4,7 @@ import {deleteItem, updateItem} from "@entities/Todo";
 import {AddTodoItem} from "@features/AddTodoItem";
 import {Space} from "antd";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
+import {useAppDispatch, useAppSelector} from "@shared/hooks/store";
 
 const TodoListWrapperStyled = styled.div`
     max-height: 300px;
@@ -12,8 +12,8 @@ const TodoListWrapperStyled = styled.div`
 `
 
 export const TodoList: React.FC = () => {
-    const todoList = useSelector(state => state.todo.items);
-    const dispatch = useDispatch();
+    const todoList = useAppSelector(state => state.todo.items);
+    const dispatch = useAppDispatch();
 
     const onDoneStatusChanged = (id: string, done: boolean) => {
         const targetItem = todoList.find(item => item.id === id);

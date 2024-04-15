@@ -1,11 +1,11 @@
 import {Button, Form, Input, Space} from "antd";
 import {FileAddOutlined} from "@ant-design/icons";
-import {useDispatch} from "react-redux";
 import {addItem} from "@entities/Todo";
+import {useAppDispatch} from "@shared/hooks/store";
 
 export const AddTodoItem: React.FC = () => {
     const [form] = Form.useForm();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     return (
         <>
